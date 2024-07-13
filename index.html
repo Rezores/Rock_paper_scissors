@@ -7,8 +7,10 @@
     </head>
     <body>
         <script>
-            function getComputerChoice(){
-                let x = Math.random(3)
+            let humanscore = 0, computerScore = 0;
+
+            function getComputerChoice (){
+                let x = Math.random()
                 if(x < 0.333){
                     return "rock";
                 }
@@ -19,10 +21,68 @@
                     return "scissors"
                 }
             }
-            let x = Math.random(3)
-            console.log(x)
-            console.log(getComputerChoice())
-            console.log("Hello world")
+
+            function getHumanChoice (){
+                let choice = prompt("input : (rock, paper, scissors)");
+                return choice;
+            }
+            
+            function playRound(humanChoice, computerChoice){
+                let humanc = humanChoice.toLowerCase();
+                let computerc = computerChoice.toLowerCase();
+                
+                if(computerc == humanc){
+                    return "Draw!"
+                }
+                else if (computerc == "paper" && humanc == "rock"){
+                    computerScore++;
+                    return "You lose! Paper beats Rock"
+                }
+                else if(computerc == "rock" && humanc == "scissors"){
+                    computerScore++;
+                    return "You lose! Rock beats Scissors"
+                }
+                else if(computerc == "scissors" && humanc == "paper"){
+                    computerScore++;
+                    return "You lose! Scissors beats paper"
+                }
+
+                else if (computerc == "rock" && humanc == "paper"){
+                    humanscore++;
+                    return "You Win! Paper beats Rock"
+                }
+                else if(computerc == "scissors" && humanc == "rock"){
+                    humanscore++;
+                    return "You Win! Rock beats Scissors"
+                }
+                else if(computerc == "paper" && humanc == "scissors"){
+                    humanscore++;
+                    return "You Win! Scissors beats paper"
+                }
+
+            }
+            function playGame(){
+                for(let i = 0 ; i < 5 ; i++){
+                    const humanSelection = getHumanChoice();
+                    const computerSelection = getComputerChoice();
+                    console.log("Human choice : " +humanSelection +" ; Computer Selection : " + computerSelection)
+                    console.log(playRound(humanSelection, computerSelection));
+                }
+                if(humanscore == computerScore){
+                    return "Draw!"
+                }
+                else if(humanscore > computerScore){
+                    return "Human Wins!"
+                }
+                else{
+                    return "Computer Wins!"
+                }
+
+            }
+            console.log(playGame())
+            console.log("Human score: " + humanscore)
+            console.log("Computer score: " + computerScore)
+
         </script>
 
 
